@@ -9,17 +9,12 @@
     <!--[if IE]><script src="js/excanvas.js" type="text/javascript" charset="utf-8"></script><![endif]-->
     <script src="js/game.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-    // <![CDATA[
       onload = function() {
-        var ctx = document.getElementById('canvas1').getContext('2d')
-        var stage = new Stage(document.getElementById('canvas1'))
-        var tile = new Tile
-        stage.add(tile)
+        var game = new Game(document.getElementById('canvas1'))
         var hunter = new Hunter
-        stage.add(hunter)
-        stage.start()
+        game.addPlayer(hunter)
+        game.start()
       }
-    // ]]>
     </script>
   </head>
   <body>
