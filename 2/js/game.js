@@ -84,7 +84,7 @@ function Hunter() {
         make_image('img/hunter_w_1.png', 16, 16)]
   }
   this.dir = 's'
-  this.distance = 2
+  this.distance = 4
   this.state_interval = 7
   this.path = []
   this.state = 0
