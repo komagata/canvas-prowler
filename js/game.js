@@ -39,8 +39,9 @@ Game.prototype = {
     }, 1000 / self.fps)
   },
   onclick: function(evt) {
-    var x = evt.layerX || evt.offsetX
-    var y = evt.layerY || evt.offsetY
+    var IE='\v'=='v'
+    var x = IE ? event.offsetX : (evt.offsetX || evt.layerX)
+    var y = IE ? event.offsetY : (evt.offsetY || evt.layerY)
     this.player.buildPath(new Point(x, y))
   }
 }
