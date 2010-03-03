@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <title>canvas</title>
+    <!--[if IE]><script src="js/excanvas.js" type="text/javascript" charset="utf-8"></script><![endif]-->
+    <script src="js/game.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      onload = function() {
+        var game = new Game(document.getElementById('canvas1'))
+        var hunter = new Hunter
+        game.addPlayer(hunter)
+        game.start()
+      }
+      //]]>
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas1" width="256" height="256"></canvas>
+    <p>灰色背景のどこかをクリック</p>
+    <img src="img/hunter_n0.png" style="display:none" />
+    <img src="img/hunter_e0.png" style="display:none" />
+    <img src="img/hunter_s0.png" style="display:none" />
+    <img src="img/hunter_w0.png" style="display:none" />
+  </body>
+</html>
