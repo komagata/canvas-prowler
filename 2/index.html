@@ -5,14 +5,33 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta name="apple-mobile-web-app-capable" />
+    <meta name="viewport" content="width=device-width" />
     <title>canvas</title>
+    <style type="text/css">
+    /* <![CDATA[ */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #label {
+        margin: 6px;
+        padding: 0;
+        font-size: 12px;
+        width: 320px;
+        text-align: center;
+      }
+    /* ]]> */
+    </style>
     <!--[if IE]><script src="js/excanvas.js" type="text/javascript" charset="utf-8"></script><![endif]-->
     <script src="js/game.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
       //<![CDATA[
       onload = function() {
-        var game = new Game(document.getElementById('canvas1'))
+        var game = new Game('canvas', 320, 320)
         var hunter = new Hunter
+        hunter.x = game.width / 2
+        hunter.y = game.height / 2
         game.addPlayer(hunter)
         game.start()
       }
@@ -20,11 +39,7 @@
     </script>
   </head>
   <body>
-    <canvas id="canvas1" width="256" height="256"></canvas>
-    <p>灰色背景のどこかをクリック</p>
-    <img src="img/hunter_n0.png" style="display:none" />
-    <img src="img/hunter_e0.png" style="display:none" />
-    <img src="img/hunter_s0.png" style="display:none" />
-    <img src="img/hunter_w0.png" style="display:none" />
+    <div id="canvas"></div>
+    <p id="label">灰色背景のどこかをクリック／タッチ</p>
   </body>
 </html>

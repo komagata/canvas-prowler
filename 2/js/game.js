@@ -3,7 +3,22 @@ function Point(x, y) {
   this.y = y
 }
 
-function Game(canvas) {
+function make_image(src, width, height) {
+  if (width == null || height == null) {
+    var img = new Image()
+  } else {
+    var img = new Image(width, height)
+  }
+  img.src = src
+  return img
+}
+
+function Game(placeholder, width, height) {
+  var ph = document.getElementById(placeholder)
+  ph.innerHTML = '<canvas id="_canvas" width="'+width+'" height="'+height+'"></canvas>'
+  var canvas = document.getElementById('_canvas')
+  this.width = width
+  this.height = height
   this.canvas = canvas
   this.context = canvas.getContext('2d')
   this.nodes = []
@@ -30,7 +45,7 @@ Game.prototype = {
   draw: function() {
     this.context.beginPath()
     this.context.fillStyle = 'rgb(128, 128, 128)'
-    this.context.fillRect(0, 0, 256, 256)
+    this.context.fillRect(0, 0, this.width, this.height)
   },
   start: function() {
     var self = this
@@ -59,20 +74,32 @@ Sprite.prototype = {
 function Hunter() {
   this.uid = new Date().getTime()
   this.src = {
-    n: 'img/hunter_n0.png',
-    e: 'img/hunter_e0.png',
-    s: 'img/hunter_s0.png',
-    w: 'img/hunter_w0.png'
+    n: [make_image('img/hunter_n_0.png', 16, 16),
+        make_image('img/hunter_n_1.png', 16, 16)],
+    e: [make_image('img/hunter_e_0.png', 16, 16),
+        make_image('img/hunter_e_1.png', 16, 16)],
+    s: [make_image('img/hunter_s_0.png', 16, 16),
+        make_image('img/hunter_s_1.png', 16, 16)],
+    w: [make_image('img/hunter_w_0.png', 16, 16),
+        make_image('img/hunter_w_1.png', 16, 16)]
   }
   this.dir = 's'
   this.distance = 2
+  this.state_interval = 7
   this.path = []
+  this.state = 0
+  this.buf = 0;
 }
 Hunter.prototype = new Sprite
 Hunter.prototype.draw = function() {
-  var img = new Image
-  img.src = this.src[this.dir]
-  this.game.context.drawImage(img, this.x, this.y)
+  this.game.context.drawImage(this.src[this.dir][this.state], this.x - 16, this.y - 16, 32, 32)
+}
+Hunter.prototype.toggle_state = function() {
+  if (this.state == 0) {
+    this.state = 1
+  } else {
+    this.state = 0
+  }
 }
 Hunter.prototype.onenterframe = function() {
   for (var i = 0; i < this.distance; i++) {
@@ -81,6 +108,12 @@ Hunter.prototype.onenterframe = function() {
       this.x = p.x
       this.y = p.y
     }
+  }
+  if (this.buf > this.state_interval) {
+    this.buf = 0
+    this.toggle_state()
+  } else {
+    this.buf++
   }
   this.draw()
 }
