@@ -21,6 +21,11 @@
         width: 320px;
         text-align: center;
       }
+      #canvas {
+        width: 320px;
+        height: 320px;
+        background: url(img/tile.png);
+      }
     /* ]]> */
     </style>
     <!--[if IE]><script src="js/excanvas.js" type="text/javascript" charset="utf-8"></script><![endif]-->
@@ -46,7 +51,7 @@
         game.add(new Drumcan(16 * 14, 16 * 15))
         game.add(new Drumcan(16 * 15, 16 * 14))
         game.add(new Drumcan(16 * 15, 16 * 15))
-	var hunter = new Hunter(160 - 8, 160 - 8)
+        var hunter = new Hunter(160 - 8, 160 - 8)
         game.addPlayer(hunter)
         game.start()
       }
